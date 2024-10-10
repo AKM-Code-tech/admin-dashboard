@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./App.scss";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { ThemeContext } from "./context/ThemeContext";
@@ -14,10 +14,11 @@ import UpdateProduct from "./screens/UpdateProduct/UpdateProduct";
 import Signin from "./screens/Signin/Signin";
 import ProtectedRoutes from '../src/screens/ProtectedRoutes/ProtectedRoutes';  
 import { SidebarProvider } from './context/SidebarContext'; 
-import { Offline } from "react-detect-offline"; // استيراد مكون Offline
+import { Offline, Online } from "react-detect-offline"; 
 
 function App() {
   const { theme, toggleTheme } = useContext(ThemeContext);
+  const [isLoading, setIsLoading] = useState(false); // حالة التحميل
 
   useEffect(() => {
     if (theme === DARK_THEME) {
@@ -88,12 +89,26 @@ function App() {
           
         </Router>
 
-        {/* Message to show when user is offline */}
+        {/* مؤشر التحميل عند انقطاع الاتصال */}
         <Offline>
           <div className="offline-message">
-            <p>⚠️ You are currently offline. Please check your internet connection.</p>
+            <div className="loading-indicator">
+              <div className="spinner"></div> {/* مؤشر التحميل */}
+            </div>
           </div>
         </Offline>
+
+        <Online>
+          {isLoading && (
+            <div className="loading-message">
+              <div className="spinner"></div> {/* مؤشر التحميل عند التحميل */}
+            </div>
+          )}
+        </Online>
+
+        {/* استجابة لتحميل البيانات أو عند فقدان الاتصال */}
+        <Offline onChange={() => setIsLoading(true)} />
+        <Online onChange={() => setIsLoading(false)} />
       </SidebarProvider>
     </>
   );

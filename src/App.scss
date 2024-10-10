@@ -207,13 +207,36 @@ ul {
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  background-color: #ff4d4f;
-  color: white;
-  padding: 10px;
-  font-weight: bold;
-  border-radius: 4px;
+  // background-color: #ff4d4f;
+  // color: white;
+  // padding: 10px;
+  // font-weight: bold;
+  // border-radius: 4px;
   z-index: 9999;
-  text-align: center;
+  // text-align: center;
   width: 100%;
-  max-width: 500px;
+  max-width: 2000px;
+}
+/* مؤشر تحميل مع حركة الدوران */
+.loading-indicator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* يأخذ كامل الشاشة */
+  background-color: rgba(0, 0, 0, 0.1); /* لون خفيف للخلفية */
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid rgba(255, 255, 255, 0.3); /* إطار شفاف جزئيًا */
+  border-top-color: #3498db; /* اللون الأساسي للحركة */
+  border-radius: 50%;
+  animation: spin 1s ease infinite; /* حركة الدوران */
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg); /* دوران 360 درجة */
+  }
 }

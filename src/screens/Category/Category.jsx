@@ -64,10 +64,20 @@ const Category = () => {
         },
       });
       showMessage("success", "Category added successfully!");
+      
+      // إعادة تحميل الفئات بعد إضافة فئة جديدة
       fetchCategories();
+
+      // مسح الحقول بعد إضافة البيانات بنجاح
+      setName("");     
+      setImage(null);  
     } catch (err) {
-      console.error("Error adding category:", err.response ? err.response.data : err.message);
-      showMessage("error", `Error adding category: ${err.response ? err.response.data.message : err.message}`);
+      // عرض رسالة الخطأ التي يرسلها السيرفر
+      const errorMessage = err.response && err.response.data && err.response.data.message
+        ? err.response.data.message
+        : "An error occurred while adding the category. Please try again.";
+      
+      showMessage("error", errorMessage);
     }
   };
 
@@ -97,8 +107,12 @@ const Category = () => {
       fetchCategories();
       setShow(false); 
     } catch (err) {
-      console.error("Error updating category:", err.response ? err.response.data : err.message);
-      showMessage("error", `Error updating category: ${err.response ? err.response.data.message : err.message}`);
+      // عرض رسالة الخطأ التي يرسلها السيرفر
+      const errorMessage = err.response && err.response.data && err.response.data.message
+        ? err.response.data.message
+        : "An error occurred while updating the category. Please try again.";
+
+      showMessage("error", errorMessage);
     }
   };
 
@@ -110,8 +124,12 @@ const Category = () => {
       showMessage("success", "Category deleted successfully!");
       fetchCategories();
     } catch (err) {
-      console.error("Error deleting category:", err.response ? err.response.data : err.message);
-      showMessage("error", `Error deleting category: ${err.response ? err.response.data.message : err.message}`);
+      // عرض رسالة الخطأ التي يرسلها السيرفر
+      const errorMessage = err.response && err.response.data && err.response.data.message
+        ? err.response.data.message
+        : "An error occurred while deleting the category. Please try again.";
+
+      showMessage("error", errorMessage);
     }
   };
 
