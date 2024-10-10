@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://username.github.io/finish-das",
+  "homepage": "https://akm-code-tech.github.io/admin-dashboard",
  "scripts": {
   "dev": "vite",
   "build": "vite build",
